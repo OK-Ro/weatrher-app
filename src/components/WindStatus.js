@@ -12,12 +12,28 @@ const WindStatusContainer = styled.div`
   border-radius: 1rem;
   color: white;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 const Header = styled.h3`
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const waveAnimation = keyframes`
@@ -32,6 +48,14 @@ const WaveContainer = styled.div`
   position: relative;
   height: 40px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 30px;
+  }
+
+  @media (max-width: 480px) {
+    height: 25px;
+  }
 `;
 
 const Wave = styled.div`
@@ -62,19 +86,29 @@ const BarContainer = styled.div`
   align-items: flex-end;
   height: 60px;
   margin: 1rem 0;
+
+  @media (max-width: 768px) {
+    height: 50px;
+    margin: 0.8rem 0;
+  }
+
+  @media (max-width: 480px) {
+    height: 40px;
+    margin: 0.5rem 0;
+  }
 `;
 
 const getGlowColor = (speed) => {
-  if (speed < 10) return "#4facfe"; // Light blue for very low speeds
-  if (speed < 20) return "#2ecc71"; // Green for low speeds
-  if (speed < 30) return "#f1c40f"; // Yellow for moderate speeds
-  if (speed < 40) return "#e67e22"; // Orange for high speeds
-  if (speed < 50) return "#e74c3c"; // Red for very high speeds
-  if (speed < 60) return "#8e44ad"; // Purple for extreme speeds
-  if (speed < 70) return "#2980b9"; // Dark blue for higher speeds
-  if (speed < 80) return "#d35400"; // Dark orange for severe speeds
-  if (speed < 90) return "#c0392b"; // Dark red for dangerous speeds
-  return "#7f8c8d"; // Grey for maximum speeds
+  if (speed < 10) return "#4facfe";
+  if (speed < 20) return "#2ecc71";
+  if (speed < 30) return "#f1c40f";
+  if (speed < 40) return "#e67e22";
+  if (speed < 50) return "#e74c3c";
+  if (speed < 60) return "#8e44ad";
+  if (speed < 70) return "#2980b9";
+  if (speed < 80) return "#d35400";
+  if (speed < 90) return "#c0392b";
+  return "#7f8c8d";
 };
 
 const Bar = styled.div`
@@ -84,6 +118,14 @@ const Bar = styled.div`
   border-radius: 2px;
   height: ${(props) => props.height}%;
   transition: background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 3px;
+  }
+
+  @media (max-width: 480px) {
+    width: 2px;
+  }
 `;
 
 const GlowingBar = styled(Bar)`
@@ -101,30 +143,70 @@ const InfoContainer = styled.div`
   align-items: flex-end;
   width: 100%;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 0.5rem;
+  }
 `;
 
 const WindSpeed = styled.div`
   font-size: 2.5rem;
   font-weight: 900;
   color: #ffffff;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const WindUnit = styled.span`
   font-size: 1rem;
   font-weight: 500;
   color: #cccccc;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const WindTime = styled.div`
   font-size: 1rem;
   opacity: 0.7;
   color: #cccccc;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const ErrorMessage = styled.div`
   color: #e74c3c;
   text-align: center;
   padding: 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 `;
 
 const WindStatus = () => {

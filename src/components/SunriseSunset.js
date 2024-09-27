@@ -16,16 +16,20 @@ const SunriseSunsetContainer = styled.div`
   height: 16vh;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   margin: 1rem auto;
-  font-family: "Arial", sans-serif; /* Modern font */
+  font-family: "Arial", sans-serif;
+  @media (max-width: 768px) {
+    width: 80%;
+    height: 25vh;
+  }
 `;
 
 const Header = styled.h3`
   margin: 0;
-  font-size: 1.8rem; /* Increased font size */
+  font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const SemicircleContainer = styled.div`
@@ -82,8 +86,18 @@ const SunriseSunset = ({ latitude, longitude }) => {
       try {
         const weatherData = await fetchWeatherData(latitude, longitude);
         const { sunrise, sunset } = weatherData.daily; // Adjust based on the API response structure
-        setSunriseTime(new Date(sunrise[0]).toLocaleTimeString());
-        setSunsetTime(new Date(sunset[0]).toLocaleTimeString());
+        setSunriseTime(
+          new Date(sunrise[0]).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
+        setSunsetTime(
+          new Date(sunset[0]).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        );
       } catch (error) {
         console.error("Error fetching sunrise and sunset times:", error);
       }
@@ -98,20 +112,20 @@ const SunriseSunset = ({ latitude, longitude }) => {
     return () => clearInterval(interval); // Cleanup on unmount
   }, [latitude, longitude]);
 
-  // Calculate the sun's position based on the current time
-  const sunriseDate = new Date(`1970-01-01T${sunriseTime}:00Z`);
-  const sunsetDate = new Date(`1970-01-01T${sunsetTime}:00Z`);
+  // Parse the times as Date objects
+  const sunriseDate = new Date(`1970-01-01T${sunriseTime}:00`);
+  const sunsetDate = new Date(`1970-01-01T${sunsetTime}:00`);
 
-  // Calculate the sun's position as a percentage of the day
+  // Calculate the total daytime duration and current daytime progress
   const totalDayTime = sunsetDate - sunriseDate;
   const currentDayTime = currentTime - sunriseDate;
   const sunPosition = Math.min(Math.max(currentDayTime / totalDayTime, 0), 1); // Clamp between 0 and 1
 
-  // Calculate the angle for the sun's position
-  const angle = sunPosition * Math.PI; // 0 to π (180 degrees)
+  // Calculate the angle for the sun's position in the semicircle (0 to π)
+  const angle = sunPosition * Math.PI; // Convert sun position to an angle in radians
   const radius = 100; // Radius of the semicircle
-  const sunX = radius + radius * Math.cos(angle); // X position
-  const sunY = 100 - 10; // Y position fixed just above the dotted line
+  const sunX = radius + radius * Math.cos(angle); // X position of the sun
+  const sunY = radius * Math.sin(angle); // Y position of the sun
 
   return (
     <SunriseSunsetContainer>
@@ -123,17 +137,16 @@ const SunriseSunset = ({ latitude, longitude }) => {
             d="M 0,100 A 100,100 0 0,1 200,100"
             fill="none"
             stroke="rgba(255, 255, 0, 0.5)"
-            strokeWidth="3" // Increased stroke width
-            strokeDasharray="5,5" // Dotted line
+            strokeWidth="3"
+            strokeDasharray="5,5"
           />
           {/* Sun position */}
-          <SunPosition cx={sunX} cy={sunY} r="12" />{" "}
-          {/* Increased radius for visibility */}
-          {/* Highlighted segment */}
+          <SunPosition cx={sunX} cy={sunY} r="12" />
+          {/* Highlighted segment up to the sun's position */}
           <path
-            d={`M 0,100 A 100,100 0 0,1 ${sunX},${sunY}`} // Highlighted segment up to the sun's position
+            d={`M 0,100 A 100,100 0 0,1 ${sunX},${sunY}`}
             fill="none"
-            stroke="rgba(255, 255, 0, 1)" // Bright yellow for the current level
+            stroke="rgba(255, 255, 0, 1)"
             strokeWidth="3"
           />
         </Semicircle>

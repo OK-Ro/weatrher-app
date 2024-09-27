@@ -35,6 +35,14 @@ const WeatherMapContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    height: 35vh;
+  }
+
+  @media (max-width: 480px) {
+    height: 30vh;
+  }
 `;
 
 const Header = styled.div`
@@ -48,8 +56,15 @@ const Title = styled.h2`
   font-size: 1.5rem;
   margin: 0;
   font-weight: 600;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+  }
+`;
 const TimeChanger = styled.div`
   display: flex;
   align-items: center;
@@ -60,19 +75,35 @@ const FormatToggle = styled.div`
   align-items: center;
   cursor: pointer;
   margin-left: 1rem;
-  padding: 0.5rem 1rem; // Increased padding for larger width
-  background-color: rgba(255, 255, 255, 0.2); // Darker background
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
   transition: all 0.3s ease;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.3);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.4rem 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.3rem 0.5rem;
+  }
 `;
 
 const FormatText = styled.span`
   margin-right: 0.5rem;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Arrow = styled(FaChevronDown)`
@@ -97,6 +128,16 @@ const PrecipitationLegend = styled.div`
   width: 7.5vw;
   border-radius: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    width: 10vw;
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 12vw;
+    padding: 0.5rem;
+  }
 `;
 
 const LegendTitle = styled.h3`
@@ -105,6 +146,14 @@ const LegendTitle = styled.h3`
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const LegendBar = styled.div`
@@ -114,6 +163,14 @@ const LegendBar = styled.div`
   border-radius: 4px;
   position: relative;
   margin-bottom: 1.25rem;
+
+  @media (max-width: 768px) {
+    width: 180px;
+  }
+
+  @media (max-width: 480px) {
+    width: 150px;
+  }
 `;
 
 const LegendLabel = styled.span`
@@ -124,6 +181,14 @@ const LegendLabel = styled.span`
   color: #e7e7eb;
   font-weight: 500;
   margin-left: 0.8rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.65rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const MapContent = styled.div`
@@ -190,6 +255,14 @@ const Temperature = styled.span`
   font-size: 1rem;
   font-weight: 500;
   margin-bottom: 0.25rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const WeatherDetails = styled.div`
@@ -197,12 +270,28 @@ const WeatherDetails = styled.div`
   justify-content: space-between;
   width: 100%;
   margin-top: 0.25rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const WeatherDetail = styled.div`
   display: flex;
   align-items: center;
   font-size: 0.8rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const DetailIcon = styled.span`

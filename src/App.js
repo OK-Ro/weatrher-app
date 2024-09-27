@@ -7,11 +7,15 @@ import Footer from "./components/Footer";
 const AppWrapper = styled.div`
   font-family: "Montserrat", sans-serif;
   background-image: url("https://getwallpapers.com/wallpaper/full/6/a/9/1173035-cold-weather-wallpaper-1920x1200-1080p.jpg");
-
   background-size: cover;
   background-position: center;
   overflow: hidden;
   padding: 15rem;
+
+  @media (max-width: 768px) {
+    padding: 0;
+    height: 360vh;
+  }
 `;
 
 const App = () => {

@@ -37,6 +37,15 @@ const ForecastContainer = styled.div`
   padding: 2rem;
   color: white;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
 `;
 
 const ForecastHeader = styled.div`
@@ -44,12 +53,25 @@ const ForecastHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const ForecastTitle = styled.h2`
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const ForecastToggle = styled.div`
@@ -72,6 +94,14 @@ const ForecastToggle = styled.div`
     transform: ${(props) =>
       props.isExpanded ? "rotate(180deg)" : "rotate(0)"};
   }
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 const TimelineContainer = styled.div`
@@ -93,22 +123,54 @@ const TimelineItem = styled.div`
   align-items: center;
   margin-right: 2rem;
   min-width: 60px;
+
+  @media (max-width: 768px) {
+    min-width: 50px;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 40px;
+  }
 `;
 
 const TimelineTime = styled.div`
   font-size: 0.9rem;
   font-weight: 500;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const TimelineIcon = styled.div`
   font-size: 2rem;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const TimelineTemp = styled.div`
   font-size: 1.1rem;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const DailyForecastsContainer = styled.div`
@@ -136,17 +198,42 @@ const DailyForecastItem = styled.div`
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+  }
 `;
 
 const WeatherIcon = styled.div`
   font-size: 2.5rem;
   margin-right: 1.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const Temperature = styled.div`
   font-size: 1.4rem;
   font-weight: bold;
   margin-right: 10rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    margin-right: 5rem;
+  }
 `;
 
 const WeatherInfo = styled.div`
@@ -158,11 +245,27 @@ const WeatherDescription = styled.div`
   font-weight: 500;
   margin-bottom: 0.3rem;
   text-transform: capitalize;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const Date = styled.div`
   font-size: 0.9rem;
   opacity: 0.8;
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.7rem;
+  }
 `;
 
 const DayOfWeek = styled.div`
@@ -170,14 +273,30 @@ const DayOfWeek = styled.div`
   font-weight: 600;
   margin-left: auto;
   padding-left: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
 `;
+
 const ErrorMessage = styled.div`
   color: #e74c3c;
   text-align: center;
   padding: 1rem;
   font-size: 1.2rem;
-`;
 
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+  }
+`;
 const WeatherForecast = () => {
   const [forecastDays, setForecastDays] = useState(7);
   const [weatherData, setWeatherData] = useState(null);

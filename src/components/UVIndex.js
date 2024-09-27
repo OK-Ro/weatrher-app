@@ -1,71 +1,113 @@
 import React, { useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
-
-// Keyframes for the loading animation
-const animate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-// Styled components for the UV index meter
-const MeterWrapper = styled.div`
+import styled from "styled-components";
+const UVIndexContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  height: 200px; /* Height for the half-circle */
-  width: 200px; /* Width for the half-circle */
+  padding: 2rem;
+  background-color: rgba(30, 33, 58, 0.95);
+  border-radius: 1rem;
+  color: white;
+  width: 12.7vw;
+  height: 16vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  margin: 1rem auto;
+  font-family: "Arial", sans-serif;
+
+  @media (max-width: 768px) {
+    width: 80%;
+    height: 25vh;
+  }
 `;
 
-const Loader = styled.div`
+const Header = styled.h3`
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+  @media (max-width: 768px) {
+    font-size: 1.6rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const HalfCircleContainer = styled.div`
   position: relative;
-  width: 160px; /* Inner circle width */
-  height: 80px; /* Half-circle height */
+  width: 100%;
+  height: 150px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: 120px;
+  }
+
+  @media (max-width: 480px) {
+    height: 100px;
+  }
 `;
 
-const LoaderInner = styled.div`
+const HalfCircle = styled.svg`
   position: absolute;
-  bottom: 0; /* Align to bottom to form a half-circle */
+  bottom: 0;
   left: 0;
-  right: 0;
-  height: 100px; /* Full height for inner circle */
-  background: #212121; /* Inner circle color */
-  border-radius: 80px 80px 0 0; /* Half-circle shape */
-  box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.2),
-    inset 3px 3px 5px rgba(0, 0, 0, 0.5);
-`;
-
-const MeterSpan = styled.span`
-  position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 80px 80px 0 0; /* Half-circle shape */
-  background-image: linear-gradient(
-    -225deg,
-    #ff7402 0%,
-    #ffe700 50%,
-    #fff55e 100%
-  ); /* Gradient color */
-  filter: blur(20px);
-  z-index: -1;
-  animation: ${animate} 2s linear infinite; /* Infinite rotation animation */
-  transform-origin: bottom; /* Rotate from the bottom */
 `;
 
-const UVValue = styled.div`
-  font-size: 1.8em; /* Larger font size */
-  color: #333; /* Darker color for readability */
-  font-weight: bold;
-  margin-top: 15px; /* Increased spacing below the meter */
+const UVIndicator = styled.path`
+  fill: rgba(173, 216, 230, 1);
+  transition: d 0.5s ease;
+`;
+
+const ValueText = styled.p`
+  font-size: 2rem;
+  margin: 0;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.5rem;
+  }
+`;
+
+const UVLabel = styled.p`
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
+`;
+
+const Mark = styled.text`
+  font-size: 1rem;
+  fill: white;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const UVIndex = () => {
-  const [uvIndex, setUvIndex] = useState(null);
+  const [uvIndex, setUvIndex] = useState(0);
 
   useEffect(() => {
     const fetchUVIndex = async () => {
@@ -84,14 +126,40 @@ const UVIndex = () => {
     fetchUVIndex();
   }, []);
 
+  const angle = (uvIndex / 12) * Math.PI;
+  const radius = 100;
+  const uvX = radius + radius * Math.cos(angle);
+  const uvY = 100 - radius * Math.sin(angle);
+
+  const fillPath = `M 0,100 A 100,100 0 0,1 ${uvX},${uvY} L ${uvX},100 Z`;
+
   return (
-    <MeterWrapper>
-      <Loader>
-        <LoaderInner />
-        <MeterSpan />
-      </Loader>
-      <UVValue>{uvIndex !== null ? `UV: ${uvIndex}` : "Loading..."}</UVValue>
-    </MeterWrapper>
+    <UVIndexContainer>
+      <Header>UV Index</Header>
+      <HalfCircleContainer>
+        <HalfCircle viewBox="0 0 200 100">
+          <path
+            d="M 0,100 A 100,100 0 0,1 200,100"
+            fill="white"
+            stroke="white"
+            strokeWidth="3"
+          />
+          <UVIndicator d={fillPath} />
+          {[0, 2, 4, 6, 8, 10, 12].map((value, index) => {
+            const markAngle = (value / 12) * Math.PI;
+            const markX = 100 + 80 * Math.cos(markAngle);
+            const markY = 100 - 80 * Math.sin(markAngle);
+            return (
+              <Mark key={index} x={markX} y={markY} textAnchor="middle">
+                {value}
+              </Mark>
+            );
+          })}
+        </HalfCircle>
+      </HalfCircleContainer>
+      <ValueText>{uvIndex}</ValueText>
+      <UVLabel>UV Index Level</UVLabel>
+    </UVIndexContainer>
   );
 };
 

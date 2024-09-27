@@ -81,6 +81,7 @@ const DewPointValue = styled.p`
   margin: 0;
   font-size: 1rem;
   font-weight: 900;
+
   @media (max-width: 480px) {
     font-size: 0.9rem;
   }
@@ -107,19 +108,15 @@ const Humidity = () => {
         const { latitude, longitude } = position.coords;
         const weatherData = await fetchWeatherData(latitude, longitude);
 
-        // Log the entire weather data response
         console.log("Weather Data:", weatherData);
 
-        // Check if current_weather exists
         if (weatherData.current_weather) {
           const currentTemperature = weatherData.current_weather.temperature;
 
-          // Get the current time and find the corresponding hourly index
           const currentTime = new Date(weatherData.current_weather.time);
-          const currentHour = currentTime.getUTCHours(); // Get the current hour in UTC
-          const currentDay = currentTime.toISOString().split("T")[0]; // Get the current date
+          const currentHour = currentTime.getUTCHours();
+          const currentDay = currentTime.toISOString().split("T")[0];
 
-          // Find the index of the current hour in the hourly data
           const hourlyTimes = weatherData.hourly.time;
           const hourlyIndex = hourlyTimes.findIndex(
             (time) =>
@@ -132,7 +129,6 @@ const Humidity = () => {
               weatherData.hourly.relative_humidity_2m[hourlyIndex];
             setHumidity(currentHumidity);
 
-            // Calculate dew point if both values are valid
             if (
               currentHumidity !== undefined &&
               currentTemperature !== undefined
@@ -169,14 +165,13 @@ const Humidity = () => {
     }
   }, []);
 
-  // Function to calculate dew point
   const calculateDewPoint = (temperature, humidity) => {
     const a = 17.27;
     const b = 237.7;
     const alpha =
       (a * temperature) / (b + temperature) + Math.log(humidity / 100);
     const dewPoint = (b * alpha) / (a - alpha);
-    return dewPoint.toFixed(2); // Return dew point rounded to 2 decimal places
+    return dewPoint.toFixed(2);
   };
 
   if (error) {

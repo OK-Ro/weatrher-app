@@ -35,12 +35,27 @@ const HighlightsContainer = styled.div`
       background-position: 0% 50%;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 100vw;
+    padding: 1rem;
+    border-radius: 3rem;
+  }
 `;
 
 const HighlightsTitle = styled.h3`
   font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    text-align: center;
+  }
 `;
 
 const LargeCardsContainer = styled.div`
@@ -48,12 +63,23 @@ const LargeCardsContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+    margin-bottom: 0.9rem;
+  }
+
+  // @media (max-width: 480px) {
+  //   grid-template-columns: 1fr;
+  //   gap: 0.5rem;
+  // }
 `;
 
 const LargeHighlightCard = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,6 +90,11 @@ const LargeHighlightCard = styled.div`
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
+
+  @media (max-width: 768px) {
+    height: 16rem;
+    padding: 1rem;
+  }
 `;
 
 const SmallCardsContainer = styled.div`
@@ -71,12 +102,22 @@ const SmallCardsContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   height: 10vh;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 `;
 
 const SmallHighlightCard = styled.div`
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,6 +126,10 @@ const SmallHighlightCard = styled.div`
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
   }
 `;
 

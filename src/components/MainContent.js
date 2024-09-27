@@ -13,11 +13,23 @@ const MainContentContainer = styled.div`
   gap: 2rem;
   padding-left: 2rem;
   border-radius: 3rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    gap: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding-left: 0.5rem;
+    gap: 1rem;
+    border-radius: 1.5rem;
+  }
 `;
 
 const BaseSection = styled.div`
   border-radius: 1.5rem;
-
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -26,6 +38,14 @@ const BaseSection = styled.div`
   h2 {
     color: white;
     margin-bottom: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 0.5rem;
   }
 `;
 
@@ -36,11 +56,21 @@ const WeatherSection = styled(BaseSection)`
   color: white;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 `;
 
 const ForecastSection = styled(BaseSection)`
   grid-column: 1;
   grid-row: 2;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 `;
 
 const RightTopSection = styled(BaseSection)`
@@ -48,11 +78,21 @@ const RightTopSection = styled(BaseSection)`
   grid-row: 1;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 `;
 
 const RightBottomSection = styled(BaseSection)`
   grid-column: 2;
   grid-row: 2;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: auto;
+  }
 `;
 
 const MainContent = () => {

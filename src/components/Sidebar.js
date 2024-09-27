@@ -18,6 +18,10 @@ const SidebarContainer = styled.div`
   padding: 2rem 0;
   border-radius: 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const Logo = styled.div`
